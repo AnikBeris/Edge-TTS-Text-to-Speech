@@ -1,0 +1,109 @@
+<svg
+  width="450"
+  height="220"
+  viewBox="0 0 450 220"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+>
+  <style>
+    .title {
+      font: 700 48px Arial, sans-serif;
+      fill: rgba(164, 191, 218, 1);
+    }
+    .subtitle {
+      font: 700 48px Arial, sans-serif;
+      fill: rgba(164, 191, 218, 1);
+    }
+    .small {
+      font: 400 20px Arial, sans-serif;
+      letter-spacing: 2px;
+      fill: rgba(164, 191, 218, 1);
+    }
+    .icon-bg {
+      fill: rgba(164, 191, 218, 1);
+    }
+    .icon-inner {
+      fill: rgba(255, 255, 255, 1);
+    }
+  </style>
+
+  <!-- Background -->
+  <rect
+    x="0.5"
+    y="0.5"
+    rx="50"
+    width="449"
+    height="99%"
+    fill="rgba(26, 27, 39, 1)"
+    stroke="rgba(228, 226, 226, 1)"
+  />
+
+  <!-- Icon block -->
+  <rect
+    x="40"
+    y="50"
+    rx="25"
+    width="120"
+    height="120"
+    fill="rgba(164, 191, 218, 1)"
+    stroke="rgba(228, 226, 226, 1)"
+  />
+
+  <rect
+    x="50"
+    y="60"
+    rx="10"
+    width="40"
+    height="100"
+    fill="rgba(26, 27, 39, 1)"
+    stroke="rgba(255, 255, 255, 1)"
+  />
+
+  <rect
+    x="110"
+    y="60"
+    rx="10"
+    width="40"
+    height="40"
+    fill="rgba(26, 27, 39, 1)"
+    stroke="rgba(228, 226, 226, 1)"
+  />
+
+  <rect
+    x="110"
+    y="110"
+    rx="2.5"
+    width="40"
+    height="10"
+    fill="rgba(26, 27, 39, 1)"
+    stroke="rgba(228, 226, 226, 1)"
+  />
+
+  <rect
+    x="110"
+    y="127"
+    rx="2.5"
+    width="40"
+    height="10"
+    fill="rgba(26, 27, 39, 1)"
+    stroke="rgba(228, 226, 226, 1)"
+  />
+
+  <rect
+    x="110"
+    y="146"
+    rx="2.5"
+    width="40"
+    height="10"
+    fill="rgba(26, 27, 39, 1)"
+    stroke="rgba(228, 226, 226, 1)"
+  />
+
+  <!-- Text -->
+  <g transform="translate(190, 50)">
+    <text x="0" y="40" class="title">AB</text>
+    <text x="0" y="90" class="subtitle">Edge TTS</text>
+    <text x="0" y="120" class="small">BY ANIK BERIS</text>
+  </g>
+</svg>
