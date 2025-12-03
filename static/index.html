@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- HEAD: Мета, стили, скрипты -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Edge TTS v1.0 — Профессиональная озвучка текста</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- === HEADER SECTION === -->
+        <header class="header">
+            <div class="logo">
+                <h1><i class="fas fa-robot"></i> AB Edge TTS v1.0</h1>
+            </div>
+            <p class="tagline">Профессиональная озвучка текста на базе Microsoft Edge TTS</p>
+            <p class="developer">Разработчик <strong>Anik Beris</strong></p>
+        </header>
+        <!-- === END HEADER === -->
+
+        <!-- === MAIN CONTENT === -->
+        <div class="content-wrapper">
+            
+            <!-- === LEFT PANEL: FORM === -->
+            <div class="form-section">
+                
+                <!-- CARD 1: MAIN FORM -->
+                <div class="card">
+                    <h2><i class="fas fa-microphone-alt"></i> ТЕКСТ ДЛЯ ОЗВУЧКИ</h2>
+                    
+                    <!-- TEXTAREA SECTION -->
+                    <div class="form-group">
+                        <label for="text-input">Текст для озвучки</label>
+                        <textarea 
+                            id="text-input" 
+                            placeholder="Введите или вставьте текст сюда..."
+                            rows="6"
+                        >Привет! Это тестовый проект разработал AnikBeris. AB Edge TTS позволяет преобразовывать текст в естественную речь.</textarea>
+                        <div class="char-count">Количество символов: <span id="char-count">0</span></div>
+                    </div>
+                    <!-- END TEXTAREA -->
+
+                    <!-- FOR TESTING (COMMENTED) -->
+                    <!-- 
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="language-select">Язык1111</label>
+                            <div class="dropdown-container">
+                                <button id="language-dropdown" class="dropdown-button">
+                                    <span id="selected-language">Выберите язык</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div id="language-options" class="dropdown-menu">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="voice-select">Голос</label>
+                            <select id="voice-select" disabled>
+                                <option value="">Сначала выберите язык</option>
+                            </select>
+                        </div>
+                    </div>
+                    -->
+
+                    <!-- SLIDERS SECTION -->
+                    <div class="slider-group">
+                        <div class="slider-item">
+                            <label>Скорость: <span id="rate-value">0%</span></label>
+                            <input type="range" id="rate-slider" min="-50" max="50" value="0" step="1">
+                        </div>
+                        <div class="slider-item">
+                            <label>Тон: <span id="pitch-value">0 Hz</span></label>
+                            <input type="range" id="pitch-slider" min="-50" max="50" value="0" step="1">
+                        </div>
+                    </div>
+                    <!-- END SLIDERS -->
+
+                    <!-- BUTTONS SECTION -->
+                    <div class="button-group">
+                        <button id="generate-btn" class="btn-primary">
+                            <i class="fas fa-play"></i> Озвучить текст
+                        </button>
+                        <button id="api-test-btn" class="btn-secondary">
+                            <i class="fas fa-code"></i> Тест API
+                        </button>
+                    </div>
+                    <!-- END BUTTONS -->
+                    
+                </div>
+                <!-- END CARD 1 -->
+
+                <!-- CARD 2: API INFO -->
+                <div class="card api-info">
+                    <h3><i class="fas fa-plug"></i> API для интеграции с n8n</h3>
+                    <p>Используйте наш API в n8n, Make, Zapier или своих приложениях:</p>
+                    <div class="code-block">
+                        <pre><code>curl -X POST http://127.0.0.1:8000/tts \
+  -H "Content-Type: application/json" \
+  -d '{
+    "text": "Привет! Это работает через API.",
+    "voice": "ru-RU-SvetlanaNeural - ru-RU (Female)",
+    "rate": 10,
+    "pitch": -5
+  }' --output speech.mp3</code></pre>
+                    </div>
+                    <button id="copy-api-btn" class="btn-small">
+                        <i class="far fa-copy"></i> Скопировать пример
+                    </button>
+                    
+                </div>
+
+
+                
+                <!-- END CARD 2 -->
+            </div>
+            <!-- === END LEFT PANEL === -->
+
+            <!-- === RIGHT PANEL: RESULTS === -->
+            <div class="result-section">
+
+                <!-- CARD 3: VOICE SELECTOR -->
+                <div class="card" style="height: 600px;">
+                    <h3><i class="fas fa-voice"></i> Выбор голоса</h3>
+                    
+                    <!-- LANGUAGE SELECTOR FOR VOICES -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="language-select">Язык перевода</label>
+                            <div class="dropdown-container">
+                                <button id="language-dropdown" class="dropdown-button">
+                                    <span id="selected-language">Выберите язык</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div id="language-options" class="dropdown-menu">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: none;">
+                        <label for="voice-select">Голос</label>
+                        <select id="voice-select" disabled>
+                            <option value="">Сначала выберите язык</option>
+                        </select>
+                    </div>
+                    <!-- END LANGUAGE SELECTOR -->
+
+                    <!-- VOICE CONTROLS -->
+                    <div class="voice-controls">
+                        <!-- GENDER FILTERS -->
+                        <div class="gender-selector">
+                            <button id="gender-all" class="gender-btn active">Все</button>
+                            <button id="gender-male" class="gender-btn">Мужские</button>
+                            <button id="gender-female" class="gender-btn">Женские</button>
+                        </div>
+                        <!-- END GENDER FILTERS -->
+
+                        <!-- SEARCH BOX -->
+                        <div class="search-box">
+                            <input type="text" id="voice-search" placeholder="Поиск голоса...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <!-- END SEARCH -->
+                    </div>
+                    <!-- END VOICE CONTROLS -->
+                    
+                    <!-- VOICE LIST -->
+                    <div id="voice-list-container" class="voice-list-container">
+                        <div class="voice-list-header">
+                            <span class="voice-count">Загрузка голосов...</span>
+                        </div>
+                        <div id="voice-list" class="voice-list" style="height: 270px;">
+                            <!-- Список голосов будет заполнен JavaScript -->
+                        </div>
+                    </div>
+                    <!-- END VOICE LIST -->
+                    
+                </div>
+                <!-- END CARD 3 -->
+
+
+                <!-- CARD 4: RESULT & AUDIO -->
+                <div class="card voice-selection-block">
+                    <h2><i class="fas fa-headphones"></i> Результат</h2>
+
+                    <!-- STATUS MESSAGE -->
+                    <div id="status-message" class="status-message">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Введите текст и нажмите "Озвучить"</span>
+                    </div>
+                    <!-- END STATUS -->
+
+                    <!-- API RESPONSE INFO -->
+                    <div class="response-info">
+                        <h3><i class="fas fa-exchange-alt"></i> Ответ API</h3>
+                        <div id="response-details" class="response-details">
+                            <div class="response-item">
+                                <span class="label">Статус:</span>
+                                <span id="response-status" class="value">—</span>
+                            </div>
+                            <div class="response-item">
+                                <span class="label">Время:</span>
+                                <span id="response-time" class="value">—</span>
+                            </div>
+                            <div class="response-item">
+                                <span class="label">Размер:</span>
+                                <span id="response-size" class="value">—</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END API RESPONSE -->
+                    
+                </div>
+                <!-- END CARD 4 -->
+
+                <!-- CARD 5: RESULT & AUDIO -->
+                <div class="card">
+                    <h2><i class="fas fa-headphones"></i> Аудио </h2>
+
+                    
+                    <!-- STATUS MESSAGE -->
+                    <div id="status-message" class="status-message">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Введите текст и нажмите "Озвучить"</span>
+                    </div>
+                    <!-- END STATUS -->
+
+                    <!-- AUDIO PLAYER -->
+                    <div id="audio-container" class="hidden">
+                        <div class="audio-player-wrapper">
+                            <audio id="audio-player" controls></audio>
+                        </div>
+                        <div class="audio-actions">
+                            <button id="download-btn" class="btn-success">
+                                <i class="fas fa-download"></i> Скачать MP3
+                            </button>
+                            <button id="play-btn" class="btn-info">
+                                <i class="fas fa-play"></i> Воспроизвести
+                            </button>
+                            <button id="stop-btn" class="btn-warning">
+                                <i class="fas fa-stop"></i> Остановить
+                            </button>
+                        </div>
+                    </div>
+                    <!-- END AUDIO PLAYER -->
+                    
+                </div>
+                <!-- END CARD 5 -->
+
+
+            </div>
+            <!-- === END RIGHT PANEL === -->
+
+        </div>
+        <!-- === END MAIN CONTENT === -->
+
+        <!-- === FOOTER SECTION === -->
+        <footer>
+            <div class="footer-content">
+                <!-- FOOTER COLUMN 1: DEVELOPMENT -->
+                <div class="footer-section">
+                    <h4><i class="fas fa-code-branch"></i> Разработка</h4>
+                    <p><strong>Разработчик:</strong> Anik Beris (Андрей Аникин)</p>
+                    <p><strong>Версия:</strong> 1.0.0</p>
+                    <p><strong>Технологии:</strong> FastAPI + Edge TTS</p>
+                </div>
+                
+                <!-- FOOTER COLUMN 2: API ENDPOINTS -->
+                <div class="footer-section">
+                    <h4><i class="fas fa-network-wired"></i> API Endpoints</h4>
+                    <p><strong>TTS API:</strong> <code>POST /api/tts</code></p>
+                    <p><strong>Список языков:</strong> <code>GET /api/languages</code></p>
+                    <p><strong>Статистика:</strong> <code>GET /api/stats</code></p>
+                </div>
+                
+                <!-- FOOTER COLUMN 3: STATISTICS -->
+                <div class="footer-section">
+                    <h4><i class="fas fa-language"></i> Статистика</h4>
+                    <p><strong>Языков:</strong> <span id="languages-count">0</span></p>
+                    <p><strong>Голосов всего:</strong> <span id="voices-count">0</span></p>
+                    <p><strong>Поддержка:</strong> 50+ языков</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>AB Edge TTS v1.0 © 2025 • Разработано Anik Beris (Андрей Аникин) • Работает оффлайн</p>
+            </div>
+        </footer>
+        <!-- === END FOOTER === -->
+        
+    </div>
+
+    <!-- === LOADING OVERLAY === -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Генерация речи...</p>
+        </div>
+    </div>
+    <!-- === END LOADING === -->
+
+    <script src="/static/main.js"></script>
+</body>
+</html>
